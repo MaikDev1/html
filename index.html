@@ -31,13 +31,27 @@
       }
 
       .form-container {
-        width: 550px;
+        width: 600px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 15px;
         text-align: left;
         height: 204vh;
+      }
+
+      @media (max-width: 768px) {
+        .form-container {
+          width: 100%;
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          padding: 15px;
+          text-align: left;
+          height: 305vh;
+        }
+
+
       }
 
       .form-title {
@@ -108,7 +122,7 @@
 
     <img src="./fdfdf.png" alt=""><br><br><br>
 
-    <form action="/" method="post" id="meuFormulario">
+    <form action="/ " method="post" id="meuFormulario">
       <div class="form-title">Formulário de Matrícula</div>
       <div class="form-topic">
         <label for="matricula">Matrícula:</label>
