@@ -17,11 +17,6 @@
         justify-content: center;
         align-items: center;
         height: 210vh;
-        background-image: url(./fdffd.png);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
       }
 
 
