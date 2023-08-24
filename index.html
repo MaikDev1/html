@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="pt-BR">
@@ -16,12 +16,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 210vh;
-        background-image: url(./fdffd.png);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
+        height: 250vh;
+
       }
 
 
@@ -36,7 +32,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 15px;
         text-align: left;
-        height: 204vh;
+        height: 230vh;
       }
 
       @media (max-width: 768px) {
@@ -63,7 +59,7 @@
       }
 
       .form-question {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 10px;
       }
 
@@ -107,28 +103,60 @@
   </head>
 
 <body>
-
   <?php
-$hostname ="localhost";
-$bancodedados = "central";
-$usario = "root";
-$senha = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $matricula = $_POST["matricula"];
+    $nome = $_POST["nome"];
+    $pergunta1 = $_POST["pergunta1"];
+    $pergunta2 = $_POST["pergunta2"];
+    $pergunta3 = $_POST["pergunta3"];
+    $pergunta4 = $_POST["pergunta4"];
+    $pergunta5 = $_POST["pergunta5"];
+    $pergunta6 = $_POST["pergunta6"];
+    $pergunta7 = $_POST["resposta1"];
+    $pergunta8 = $_POST["resposta2"];
+    $pergunta9 = $_POST["resposta3"];
+    $pergunta10 = $_POST["pergunta7"];
 
-$my = new mysqli("$hostname","$bancodedados","$usario","$senha");
-if($mysqli->connect_errno){
-  echo"Falhar ao conectar:(" . $mysqli->connect_errno . ")" .$mysqli->coonect_error;
-}else
- echo "Conectado!";
+    // Configurações do banco de dados
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "central";
+
+    // Cria uma conexão com o banco de dados
+    $conn = new mysqli($servername, $username,$password,$dbname);
+
+    // Verifica a conexão
+    if ($conn->connect_error) {
+        die("Erro na conexão: " . $conn->connect_error);
+    }
+
+    // Prepara a instrução SQL para a inserção
+    $sql = "INSERT INTO formularios (matricula,name,pergunta1,pergunta2,pergunta3,pergunta4,pergunta5,pergunta6,pergunta7,pergunta8,pergunta9,pergunta10) VALUES ('$matricula', '$nome', '$pergunta1','$pergunta2','$pergunta3','$pergunta4','$pergunta5','$pergunta6','$pergunta7','$pergunta8','$pergunta9','$pergunta10')";
+    
+
+
+    // Executa a inserção
+    if ($conn->query($sql) === TRUE) {
+       // echo  "Dados inseridos com sucesso!";
+    } else {
+       // echo "Erro na inserção: " . $conn->error;
+    }
+    // Fecha a conexão
+    $conn->close();
+  }
 ?>
+
 
   <div class="form-container">
 
     <article>
 
-      <h1><STROng>Formulário de Avaliação - Plano de Saúde</STROng></h1>
+      <h1><strong>Formulário de Avaliação - Plano de Saúde</strong></h1>
 
       <p>
-        O Plano de Saúde e assistência médico-hospitalar e ambulatorial (ASSIM Saúde) tem como responsabilidade prestar serviços que abrangem exames complementares, terapias, diagnósticos, internações clínico-cirúrgicas, obstétricas e em terapia intensiva, tanto em situações eletivas quanto emergenciais, em hospitais e clínicas, com acomodações coletivas comportando até três leitos hospitalares, sem restrição de faixa etária, para TODOS os colaboradores desta CENTRAL e seus dependentes.
+        O Plano de Saúde e assistência médico-hospitalar e ambulatorial (ASSIM Saúde) tem como responsabilidade prestar serviços que abrangem exames complementares, terapias, diagnósticos, internações clínico-cirúrgicas, obstétricas e em terapia intensiva, tanto em situações eletivas quanto emergenciais, em hospitais e clínicas, com acomodações coletivas comportando até três leitos hospitalares, sem restrição de faixa etária, para <strong>TODOS</strong> os colaboradores desta <strong>CENTRAL</strong> e seus dependentes.
       </p>
 
       <p>
@@ -138,81 +166,81 @@ if($mysqli->connect_errno){
 
     <img src="./fdfdf.png" alt=""><br><br><br>
 
-    <form action="/" method="post" id="meuFormulario">
-      <div class="form-title">Formulário de Matrícula</div>
+    <form action="formulario.php" method="post">
+      <div class="form-title"><strong>Formulário de Matrícula</strong></div>
       <div class="form-topic">
-        <label for="matricula">Matrícula:</label>
+        <label for="matricula"><strong>Matrícula</strong>:</label>
         <input type="number" id="matricula" name="matricula" required>
       </div>
 
       <div class="form-topic">
-        <label for="nome">Nome:</label>
+        <label for="nome"><strong>Nome</strong>:</label>
         <input type="text" id="nome" name="nome" required>
       </div>
 
 
       <div>
         <div class="form-question" required>Você está satisfeito com a maneira que os serviços do plano de saúde são descritos e comunicados?</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaServico1" name="pergunta1" value="satisfeito" required>Satisfeito</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaServico1" name="pergunta1" value="satisfeito" required> Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaServico2" name="pergunta1" value="muitosatisfeito" required> Muito Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaServico3" name="pergunta1" value="insatisfeito" required> Insatisfeito</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaServico4" name="pergunta1" value="muitoinsatisfeito" required>Muito Insatisfeito</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaServico4" name="pergunta1" value="muitoinsatisfeito" required> Muito Insatisfeito</label>
       </div>
       <div class="bk">
-        <div class="form-question">Qual o seu grau de satisfação com o canal de atendimento da ASSIM?</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaAtendimento1" name="pergunta2" value="satisfeito" required>Satisfeito</label>
+        <div class="form-question">Qual o seu grau de satisfação com o canal de atendimento da <strong>ASSIM</strong>?</div>
+        <label class="checkbox-label"><input type="radio" id="perguntaAtendimento1" name="pergunta2" value="satisfeito" required> Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaAtendimento2" name="pergunta2" value="muitosatisfeito" required> Muito Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaAtendimento3" name="pergunta2" value="insatisfeito" required> Insatisfeito</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaAtendimento4" name="pergunta2" value="muitoinsatisfeito" required>Muito Insatisfeito</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaAtendimento4" name="pergunta2" value="muitoinsatisfeito" required> Muito Insatisfeito</label>
       </div>
 
       <div class="bk">
         <div class="form-question">Você tem ou teve dificuldade em realizar uma marcação de consulta, exame ou internação?</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaConsulta1" name="pergunta3" value="sim" required>SIM</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaConsulta2" name="pergunta3" value="nao" required>NÃO</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaConsulta1" name="pergunta3" value="sim" required> Sim</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaConsulta2" name="pergunta3" value="nao" required> Não</label>
       </div>
       <div class="bk">
         <div class="form-question">Qual sua maior dificuldade na utilização dos serviços do plano de saúde? </div>
-        <label class="checkbox-label"><input type="radio" id="perguntaUtilizacao" name="pergunta4" value="sim" required>SIM</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaUtilizacao" name="pergunta4" value="nao" required>NÃO</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaUtilizacao" name="pergunta4" value="sim" required> Sim</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaUtilizacao" name="pergunta4" value="nao" required> Não</label>
       </div>
       <div class="bk">
         <div class="form-question">Qual o seu grau de satisfação com os serviços prestados?</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao1" name="pergunta5" value="satisfeito" required>Satisfeito</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao1" name="pergunta5" value="satisfeito" required> Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao2" name="pergunta5" value="muitosatisfeito" required> Muito Satisfeito</label>
         <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao3" name="pergunta5" value="insatisfeito" required> Insatisfeito</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao4" name="pergunta5" value="muitoinsatisfeito" required>Muito Insatisfeito</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaSatisfacao4" name="pergunta5" value="muitoinsatisfeito" required> Muito Insatisfeito</label>
       </div>
 
       <div class="bk">
         <div class="form-question">Você já realizou alguma reclamação direto ao Plano de Saúde que não foi resolvida?</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaPlano1" name="pergunta6" value="sim" required>SIM</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaPlano2" name="pergunta6" value="nao" required>NÃO</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaPlano1" name="pergunta6" value="sim" required> Sim</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaPlano2" name="pergunta6" value="nao" required> Não</label>
       </div>
       <div class="bk">
-        <label for="pergunta2">Você possui algum ELOGIO ou QUEIXA relacionado aos serviços do Plano de Saúde?</label>
-        <input type="text" id="perguntaQueixa1" name="resposta7" required>
+        <label class="form-question" for="pergunta2">Você possui algum <strong>ELOGIO</strong> ou<strong> QUEIXA </strong>relacionado aos serviços do Plano de Saúde?</label>
+        <input type="text" maxlenght="255" id="perguntaQueixa1" name="resposta1" required>
       </div>
       <div class="bk">
-        <label for="pergunta2">Algum dos seus Dependentes no plano possuem ELOGIO ou QUEIXA relacionado aos serviços do Plano de Saúde? Se SIM especificar o nome do Dependente.</label>
-        <input type="text" id="perguntaQueixa2" name="resposta7" required>
+        <label class="form-question" class="form-question" for="pergunta2">Alguns dos seus dependentes no plano possuem <strong>elogio</strong> ou <strong>queixa</strong> relacionado aos serviços do Plano de Saúde? Se <strong>SIM</strong> especificar o nome do Dependente.</label>
+        <input type="text" maxlength="255" id="perguntaQueixa2" name="resposta2" required>
       </div>
       <div class="bk">
-        <label for="pergunta2">Você possui alguma sugestão de melhoria ao Plano de Saúde</label>
-        <input type="text" id="perguntaQueixa3" name="resposta7" required>
+        <label class="form-question" for="pergunta2">Você possui alguma sugestão de melhoria ao Plano de Saúde ?</label>
+        <input type="text" maxlenght="255" id="perguntaQueixa3" name="resposta3" required>
       </div>
       <div class="bk">
         <div class="form-question"> Em uma escala de “0” a “10”, qual o seu grau de satisfação com o Plano de Saúde. “0” significa que se sente totalmente insatisfeito: 10 significa que se sente totalmente satisfeito. No meio da escala está o 5 que significa neutro (nem satisfeito nem insatisfeito).</div>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau1" name="pergunta8" value="opcao1" required>1</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau2" name="pergunta8" value="opcao2" required>2</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau3" name="pergunta8" value="opcao3" required>3</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau4" name="pergunta8" value="opcao4" required>4</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau5" name="pergunta8" value="opcao5" required>5 (NEUTRO)</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau6" name="pergunta8" value="opcao6" required>6</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau7" name="pergunta8" value="opcao7" required>7</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau8" name="pergunta8" value="opcao8" required>8</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau9" name="pergunta8" value="opcao9" required>9</label>
-        <label class="checkbox-label"><input type="radio" id="perguntaGrau10" name="pergunta8" value="opcao10" required>10</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau1" name="pergunta7" value="1" required> 1</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau2" name="pergunta7" value="2" required> 2</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau3" name="pergunta7" value="3" required> 3</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau4" name="pergunta7" value="4" required> 4</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau5" name="pergunta7" value="5" required> 5 (NEUTRO)</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau6" name="pergunta7" value="6" required> 6</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau7" name="pergunta7" value="7" required> 7</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau8" name="pergunta7" value="8" required> 8</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau9" name="pergunta7" value="9" required> 9</label>
+        <label class="checkbox-label"><input type="radio" id="perguntaGrau10" name="pergunta7" value="10" required> 10</label>
         <script>
           document.getElementById("meuFormulario").addEventListener("submit", function (event) {
             var requiredCheckboxes = document.querySelectorAll('input[type="radio"][required]');
@@ -235,6 +263,9 @@ if($mysqli->connect_errno){
       <button class="submit-button" type="submit">Enviar</button>
     </form>
   </div>
+</body>
+
+</html>
 </body>
 
 </html>
