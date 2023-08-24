@@ -114,10 +114,11 @@ $bancodedados = "central";
 $usario = "root";
 $senha = "";
 
-$my = new mysqli($hostname,$bancodedados,$usario,$senha);
+$my = new mysqli("$hostname","$bancodedados","$usario","$senha");
 if($mysqli->connect_errno){
   echo"Falhar ao conectar:(" . $mysqli->connect_errno . ")" .$mysqli->coonect_error;
-}
+}else
+ echo "Conectado!";
 ?>
 
   <div class="form-container">
